@@ -54,3 +54,6 @@ precipitation_data =
   mutate(month = month.name[month])
 ```
 
+The Mr. Clean Wheel dataset contains information about the contents of `r nrow(trash_data)` dumpsters, including the weight (tons) and volume ($$yd^3$$) of trash and its type (e.g. plastic bottles, cigarette butts, and sports balls). **In 2019, the median number of sports balls collected in a dumpster was  `r trash_data %>% filter(year == 2019) %>% pull(sports_balls) %>% median()`.**
+
+The Precipitation dataset contains `r nrow(precipitation_data)` monthly observations from 2018 - 2019 for total precipitation in inches. There are `r ncol(precipitation_data)` variables in the dataset. **The total precipitation in 2018 was `r precipitation_data %>% filter(year == 2018) %>% pull(total) %>% sum()`**
