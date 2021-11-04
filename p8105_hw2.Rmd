@@ -1,0 +1,26 @@
+---
+title: "HW 2"
+author: "AJ Catalano"
+date: "11/4/2021"
+output: github_document
+---
+
+```{r}
+library(tidyverse)
+library(readxl)
+```
+
+## Question 1
+
+#### Loading and cleaning Trash Wheel data:
+
+```{r}
+trash_data =
+  read_excel("./data/Trash-Wheel-Collection-Totals-7-2020-2.xlsx",
+             sheet = "Mr. Trash Wheel",
+             range = "A2:N535") %>%
+  filter(Dumpster != "NA") %>%
+  mutate_at("Sports Balls", round) %>%
+  janitor::clean_names() %>%
+  rename(dumpster_id = dumpster)
+```
