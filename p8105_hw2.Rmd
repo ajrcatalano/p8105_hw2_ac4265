@@ -118,3 +118,24 @@ data_538 =
 ```
 
 The SNP dataset includes monthly S&P 500 closing prices from `r snp_data %>% pull(year) %>% range()`. The Unemployment dataset contains the monthly unemployment rate from `r unemployment_data %>% pull(year) %>% range()`. The Pols dataset contains monthly entries on the political party affiliation of major federal and state elected officials from `r pols_data %>% pull(year) %>% range()`. The complete dataset, data_538, contains `r ncol(data_538)` variables and `r nrow(data_538)` observations.
+
+## Question 3
+
+```{r}
+pop_baby_names = 
+  read_csv("./data/Popular_Baby_Names.csv") %>%
+  janitor::clean_names() %>%
+  mutate(
+    ethnicity = recode(ethnicity,
+                       "ASIAN AND PACIFIC ISLANDER" = "api",
+                       "BLACK NON HISPANIC" = "blk_non_hisp",
+                       "HISPANIC" = "hisp",
+                       "WHITE NON HISPANIC" = "white_non_hisp",
+                       "ASIAN AND PACI" = "api",
+                       "BLACK NON HISP" = "blk_non_hisp",
+                       "WHITE NON HISP" = "white_non_hisp"),
+    gender = recode(gender,
+                    "FEMALE" = "f",
+                    "MALE" = "m")) %>%
+  distinct()
+```
