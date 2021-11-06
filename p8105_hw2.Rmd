@@ -63,7 +63,7 @@ The Precipitation dataset contains `r nrow(precipitation_data)` monthly observat
 Reading and cleaning pols_month data:
 
 ```{r}
-pols_month =
+pols_data =
   read_csv("./data/fivethirtyeight_datasets/pols-month.csv") %>%
   separate(mon, into = c("year", "month", "day"), convert = TRUE) %>%
   mutate(month = month.name[month],
@@ -96,6 +96,24 @@ unemployment_data =
     names_to = "month",
     values_to = "unemployment_rate"
   ) %>%
-  mutate()
+  janitor::clean_names() %>%
+  mutate(
+    month = factor(month, levels = month.abb)) %>%
+  arrange(month, year) %>%
+  mutate(month = recode(month,
+             Jan = "January", Feb = "February",
+             Mar = "March", Apr = "April",
+             May = "May", Jun = "June",
+             Jul = "July", Aug = "August",
+             Sep = "September", Oct = "October",
+             Nov = "November", Dec = "December"))
+```
+
+Merging SNP into Pols and then Unemployment:
+
+```{r}
+data_538 = 
+  left_join(pols_data, snp_data) %>%
+  left_join(., unemployment_data)
 ```
 
