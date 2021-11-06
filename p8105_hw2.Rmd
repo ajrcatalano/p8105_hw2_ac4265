@@ -117,3 +117,4 @@ data_538 =
   left_join(., unemployment_data)
 ```
 
+The SNP dataset includes monthly S&P 500 closing prices from `r snp_data %>% pull(year) %>% range()`. The Unemployment dataset contains the monthly unemployment rate from `r unemployment_data %>% pull(year) %>% range()`. The Pols dataset contains monthly entries on the political party affiliation of major federal and state elected officials from `r pols_data %>% pull(year) %>% range()`. The complete dataset, data_538, contains `r ncol(data_538)` variables and `r nrow(data_538)` observations.
